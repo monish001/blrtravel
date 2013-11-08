@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Bangalore Trips";
+}
+
+@section featured {
+}
+
+@{
+    var db= Database.Open("StarterSite");
+    var sqlQ = "SELECT * FROM Place order by distance";
+    var data = db.Query(sqlQ);
+}
+
+<h3>Following are the places to explore around bangalore:</h3>
+
+<ol class="">
+       @foreach(var row in data)
+       {
+        <li class="">
+            <h5 class="place-name">@row.Name</h5> 
+            <div class="distance"><span class="dim">Distance from bangalore: </span><span>@row.Distance km</span></div>
+            <div class="clear-both"></div>
+            @*<div class="detail">@row.DescriptionDetail</div>*@
+            <article class="brief">@row.DescriptionBrief</article>
+            <a href="">Learn more…</a>
+        </li>
+       }
+</ol>
